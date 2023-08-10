@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+
 import Categories from '../components/categories';
 import Sort from '../components/sort';
 import Skeleton from '../components/pizzaBlock/Skeleton';
 import PizzaBlock from '../components/pizzaBlock';
+import Pagination from '../components/pagination';
 
 const Home = ({ searchValue }) => {
 
@@ -21,6 +23,9 @@ const Home = ({ searchValue }) => {
     sortProperty: 'rating',
   });
 
+  //for pagination
+  const [currentPage, setCurrentPage] = useState(1)
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +39,7 @@ const Home = ({ searchValue }) => {
     const search = searchValue ? `title=${searchValue}` : '';
     
     fetch(
-      `https://647e4e51af984710854b2851.mockapi.io/items?${search}&${category}&sortBy=${sortBy}&order=${order}`)
+      `https://647e4e51af984710854b2851.mockapi.io/items?page=${currentPage}&limit=4&${search}&${category}&sortBy=${sortBy}&order=${order}`)
     .then((res) => res.json())
     .then((PizzaData) => {
       setPizzaItems(PizzaData)
@@ -42,7 +47,7 @@ const Home = ({ searchValue }) => {
     });
     window.scrollTo(0, 0);
     
-  }, [searchValue, categoryId, sortType]); 
+  }, [searchValue, categoryId, sortType, currentPage]); 
 
 
 
@@ -63,20 +68,21 @@ const Home = ({ searchValue }) => {
               onChangeSort={(i) => setSortType(i)}
             />
 
-          </div>
-          <h2 className="content__title">All pizzas</h2>
-          <div className="content__items">
-            {isLoading ? skeletons : pizzas}  
-            {/* <- Spread operator, instead of ↓ */}
-                {/* title={obj.title} 
-                price={obj.price} 
-                imageUrl={obj.imageUrl}
-                types={obj.types}
-                sizes={obj.sizes} */}
-              
+      </div>
+      <h2 className="content__title">All pizzas</h2>
+      <div className="content__items">
+        {isLoading ? skeletons : pizzas}  
+        {/* <- Spread operator, instead of ↓ */}
+        {/* title={obj.title} 
+        price={obj.price} 
+        imageUrl={obj.imageUrl}
+        types={obj.types}
+        sizes={obj.sizes} */}
+      </div>
 
+      <Pagination onChangePage={(number) => setCurrentPage(number)}/>
+      
 
-          </div>
     </div>
   )
 }
