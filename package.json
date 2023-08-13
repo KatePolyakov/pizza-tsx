@@ -1,6 +1,6 @@
 {
   "name": "pizza-tsx",
-  "version": "0.11.0",
+  "version": "0.12.01",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
