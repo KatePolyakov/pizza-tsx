@@ -10,9 +10,6 @@ import './scss/app.scss';
 
 export const SearchContext = createContext('');
 
-console.log(SearchContext);
-
-
 function App() {
 
   const [searchValue, setSearchValue] = useState('');
