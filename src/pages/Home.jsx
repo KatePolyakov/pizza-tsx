@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector, useDispatch  } from 'react-redux';
 
 
 import Categories from '../components/categories';
@@ -9,13 +10,15 @@ import Pagination from '../components/pagination';
 import { SearchContext } from '../App';
 
 const Home = () => {
+  const categoryId = useSelector(state => state.filter.categoryId); // <-import using hook and give in variable;
+
   const { searchValue } = useContext(SearchContext)
   const [pizzaItems, setPizzaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   //took from categories and renamed
   //const [activeIndex, setActiveIndex] = useState(0);
-  const [categoryId, setCategoryId] = useState();
+  //const [categoryId, setCategoryId] = useState();
 
   //took from sort and renamed
   //const [listPizza, setListPizza] = useState(0);
@@ -23,6 +26,12 @@ const Home = () => {
     name: 'popular', 
     sortProperty: 'rating',
   });
+
+  const onChangeCategory = (id) => {
+    console.log("# category: ", id);
+  };
+
+  console.log("# category: ", categoryId);
 
   //for pagination
   const [currentPage, setCurrentPage] = useState(1)
@@ -62,7 +71,7 @@ const Home = () => {
             
             <Categories 
               value={categoryId} 
-              onClickCategory={(i) => setCategoryId(i)}
+              onClickCategory={onChangeCategory}
             />
             <Sort
               value={sortType}

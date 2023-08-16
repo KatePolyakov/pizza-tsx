@@ -2,7 +2,7 @@
 import React, { useState, createContext } from 'react';
 
 //useSelector == useContext, useDispatch == to do smth g
-import { useSelector, useDispatch } from 'react-redux';
+
 import { Routes, Route } from "react-router-dom";
 
 import Header from './components/header';
@@ -18,25 +18,10 @@ export const SearchContext = createContext('');
 function App() {
 
   const [searchValue, setSearchValue] = useState('');
-  const count = useSelector((state) => state.counter.count)
-  const dispatch = useDispatch()
 
   return (
     <div className="wrapper">
-      <button
-        aria-label="Increment value"
-        onClick={() => dispatch(increment())}
-      >
-        Increment
-      </button>
-      <span>{count}</span>
-      <button
-        aria-label="Decrement value"
-        onClick={() => dispatch(decrement())}
-      >
-        Decrement
-      </button>
-
+      
       <SearchContext.Provider value={{ searchValue, setSearchValue}}>
         <Header/>
         <div className="content">
