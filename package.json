@@ -1,6 +1,6 @@
 {
   "name": "pizza-tsx",
-  "version": "0.13.00",
+  "version": "0.13.01",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

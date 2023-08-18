@@ -8,8 +8,10 @@ import Skeleton from '../components/pizzaBlock/Skeleton';
 import PizzaBlock from '../components/pizzaBlock';
 import Pagination from '../components/pagination';
 import { SearchContext } from '../App';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const categoryId = useSelector(state => state.filter.categoryId); // <-import using hook and give in variable;
 
   const { searchValue } = useContext(SearchContext)
@@ -29,6 +31,7 @@ const Home = () => {
 
   const onChangeCategory = (id) => {
     console.log("# category: ", id);
+    dispatch(setCategoryId(id));
   };
 
   console.log("# category: ", categoryId);
